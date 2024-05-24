@@ -66,7 +66,7 @@ if ($_POST == " ") {
         <div class="content border">
             <form action="">
                 <div class="row">
-                    <h5>Pertanyaan</h5>
+                    <h5>Pertanyaan gejala</h5>
                 </div>
                 <div class="row">
                     <div class="col">
