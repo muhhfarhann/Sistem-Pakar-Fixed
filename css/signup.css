@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    outline: none;
+}
+
+body{
+    font-family: 'Montserrat', 'Times New Roman';
+    background-image: url(../assets/img/header-bg.jpg);
+    color: #f1f1f1;
+}
+
+/* Hero */
+.container {
+    width: 100vw;
+    height: 100vh;
+    padding-top: 6rem;
+}
+
+.container h2{
+    text-align: center;
+}
+
+.container .content{
+    background-color: rgba(255, 255, 255, 0.582);
+    width: 500px;
+    height: 350px;
+    margin: auto;
+    padding: 1rem 1rem;
+    border-radius: 5%;
+    box-shadow: 0px 40px 30px -20px black;
+    border: solid 1px black;
+    display: flex;
+    justify-content: center;
+    color: black;
+}

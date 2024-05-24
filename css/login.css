@@ -1,0 +1,46 @@
+:root{
+    --primary: #cfc8be;
+    --bg: #000;
+}
+
+*{
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    color: var(--bg);
+}
+
+body{
+    font-family: 'Times New Roman', Times, serif;
+    /* background-color: var(--primary); */
+}
+
+/* Navbar */
+.navbar {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.navbar .container .navbar-collapse ul li a:hover{
+    color: green;
+    transform: scale(1.1);
+}
+
+/* Hero */
+.hero {
+    width: 100vw;
+    height: 100vh;
+    padding-top: 8rem;
+    background-image: url(../assets/img/header-bg.jpg);
+}
+
+.hero .content{
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 500px;
+    height: 350px;
+    margin: auto;
+    border-radius: 5%;
+    box-shadow: 0px 40px 30px -20px black;
+    border: solid 1px black;
+}

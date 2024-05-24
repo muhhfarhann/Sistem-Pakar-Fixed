@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+    outline: none;
+    text-decoration: none;
+}
+
+body{
+    font-family: 'Montserrat', 'Times New Roman';
+}
+
+/* Content */
+.container-content{
+    margin-top: 4rem;
+}
+
+.content{
+    display: flex;
+    margin-left: 7rem;
+    width: 80%;
+}

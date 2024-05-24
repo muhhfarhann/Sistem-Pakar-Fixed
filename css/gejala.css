@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Montserrat', 'Times New Roman';
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    height: 700px;
+}
+
+/* Navbar */
+.navbar{
+    position: fixed;
+    top: 0;
+}
+
+.navbar .container{
+background-color: #3d3d3d;
+height: 50px;
+width: 100vw;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-bottom: 5rem;
+}
+
+.navbar .container .navbar-nav{
+    display: flex;
+    justify-content: center;
+}
+
+.navbar .container .navbar-nav a{
+    margin-right: 3rem;
+    color: #fafafa;
+}
+
+.nav-link.disabled {
+    pointer-events: none; /* Menonaktifkan klik */
+    opacity: 0.2;         /* Membuat elemen terlihat disable */
+    color: gray;          /* Ubah warna teks jika diperlukan */
+}
+
+
+/* table */
+.table{
+    margin-top: 4rem;
+}
+
+.table h3{
+    margin-left: 210px;
+}
+
+.table-content{
+    display: flex;
+    justify-content: center;
+}
+

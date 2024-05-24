@@ -1,0 +1,35 @@
+*{
+    border: none;
+    text-decoration: none;
+    outline: none;
+    box-sizing: border-box;
+    color: black;
+}
+
+body{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.container{
+    width: 100vw;
+    height: 100vh;
+}
+
+.container .content{
+    margin: auto;
+    height: 100vh;
+}
+
+.content form .fm-1{
+    width: 500px;
+    height: 100px;
+    overflow-y: scroll;
+}
+
+.content form .txt{
+    border: 1px solid black;
+    width: 500px;
+    height: 100px;
+    max-height: 100px;
+    overflow-y: scroll;
+}
