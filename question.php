@@ -70,7 +70,7 @@ if ($_POST == " ") {
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input type="text" name="namaKerusakan" value="apakah ..">
+                        <input type="text" name="namaKerusakan" value="apakah data?">
                     </div>
                     <div class="col">
     
