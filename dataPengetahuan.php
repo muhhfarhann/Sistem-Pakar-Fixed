@@ -1,8 +1,9 @@
 <?php 
 
 require 'function.php';
-$data1 = query("SELECT * FROM dataKerusakan");
-$data2 = query("SELECT * FROM dataGejala");
+$data1 = query("SELECT * FROM kerusakan");
+$data2 = query("SELECT * FROM gejala");
+
 
 if ( isset($_POST["submit"]) ) {
 
@@ -81,53 +82,35 @@ if ( isset($_POST["submit"]) ) {
         <div class="container-sm">
             <form action="" method="post">
                 <div class="row">
-                    <h5>Data Pengetahuan</h5>
+                    <h5>Tambah Data Pengetahuan</h5>
+                    <p style="font-style: italic; color: red;">Please refresh if want to input more</p>
                 </div>
                 <div class="row justify-content-center pb-3">
                     <div class="col-2">
-                        <label for="DataKerusakan">Kerusakan</label>
+                        <label for="selectedKerusakan">Kerusakan</label>
                     </div>
                     <div class="col">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownKerusakan" data-bs-toggle="dropdown" aria-expanded="false">
-                            -Pilih Kerusakan Jaringan LAN-
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownKerusakan">
-                            <?php foreach($data1 as $dt) : ?>
-                                <li><a class="dropdown-item" href="#" onclick="selectKerusakan('<?= $dt["kodeKerusakan"] ?>', '<?= $dt["namaKerusakan"] ?>')"><?= $dt["kodeKerusakan"]." ".$dt["namaKerusakan"]; ?></a></li>
+                        <select id="kerusakanSelect" onchange="updateKodeKerusakan()">
+                            <option value="" selected>-Pilih Gejala Kerusakan-</option>
+                            <?php foreach( $data1 as $dt ) : ?>
+                            <option value="<?= $dt["kodeKerusakan"] ?>"><?= $dt["kodeKerusakan"]." ".$dt["namaKerusakan"]; ?></option>
                             <?php endforeach; ?>
-                        </ul>
+                        </select>
                         <input type="hidden" name="kodeKerusakan" id="selectedKerusakan">
                     </div>
                 </div>
                 <div class="row justify-content-center pb-3">
                     <div class="col-2">
-                        <label for="DataKerusakan">Gejala</label>
+                        <label for="selectedKerusakan">Gejala</label>
                     </div>
                     <div class="col">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownGejala" data-bs-toggle="dropdown" aria-expanded="false">
-                            -Pilih Gejala Kerusakan Jaringan LAN-
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownGejala">
-                            <?php foreach($data2 as $dt) : ?>
-                                <li><a class="dropdown-item" href="#" onclick="selectGejala('<?= $dt["kodeGejala"] ?>', '<?= $dt["namaGejala"] ?>')"><?= $dt["kodeGejala"]." ".$dt["namaGejala"]; ?></a></li>
+                        <select id="gejalaSelect" onchange="updateGejala()">
+                            <option value="" selected>-Pilih Gejala-</option>
+                            <?php foreach( $data2 as $dt ) : ?>
+                            <option value="<?= $dt["kodeGejala"] ?>"><?= $dt["kodeGejala"]." ".$dt["namaGejala"]; ?></option>
                             <?php endforeach; ?>
-                        </ul>
-                        <input type="hidden" name="kodeGejala" id="selectedGejala">
-                    </div>
-                </div>
-                <div class="row justify-content-center pb-3">
-                    <div class="col-2">
-                        <label for="DataKerusakan">Pertanyaan</label>
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownPertanyaan" data-bs-toggle="dropdown" aria-expanded="false">
-                            -Pilih Pertanyaan Kerusakan Jaringan LAN-
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownPertanyaan">
-                            <?php foreach($data1 as $dt) : ?>
-                                
-                            <?php endforeach; ?>
-                        </ul>
+                        </select>
+                        <input type="hidden" name="kodeGejala" id="gejalaSelected">
                     </div>
                 </div>
                 <button class="btn btn-success" type="submit" name="submit">SAVE</button>

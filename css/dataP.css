@@ -10,9 +10,19 @@ body {
 font-family: 'Montserrat', 'Times New Roman';
 /* background-color: rgb(255, 255, 255); */
 color: rgb(0, 0, 0);
+height: 200rem;
 }
 
 /* Navbar */
 
 
 /* content */
+
+/* Form */
+
+.dropdown-toggle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}

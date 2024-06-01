@@ -3,7 +3,7 @@ require 'function.php';
 
 if ( isset($_POST["submit"]) ) {
     
-    if( insert($_POST) > 0){
+    if( signUp($_POST) > 0){
         echo"
         <script>
             alert('Success');
@@ -55,8 +55,7 @@ if ( isset($_POST["submit"]) ) {
                         <div id="emailHelp" class="form-text" style="font-style:italic;color:red;">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="col-md">
-                        <label for="role" class="form-label">Role</label>
-                        <input type="text" class="form-control" id="role" style="width:50%;" name="role" required>
+                        <input type="hidden" class="form-control" id="role" style="width:50%;" name="role" value="user" required>
                     </div>
                 </div>
                 <div class="row-md">

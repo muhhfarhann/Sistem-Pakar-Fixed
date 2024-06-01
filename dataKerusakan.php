@@ -1,8 +1,25 @@
 <?php 
 
 require 'function.php';
-$data1 = query("SELECT * FROM dataKerusakan"); 
-$data2 = query("SELECT * FROM dataGejala");
+
+$sql= "
+SELECT 
+    k.kodeKerusakan, 
+    k.namaKerusakan, 
+    GROUP_CONCAT(g.namaGejala ORDER BY g.namaGejala SEPARATOR ', ') AS gejala, 
+    s.solusi 
+FROM 
+    kerusakan k 
+JOIN 
+    rule r ON k.kodeKerusakan = r.kodeKerusakan 
+JOIN 
+    gejala g ON r.kodeGejala = g.kodeGejala 
+JOIN 
+    solusi s ON k.kodeKerusakan = s.kodeKerusakan 
+GROUP BY 
+    k.kodeKerusakan";
+
+$result = query($sql);
 
 ?>
 <!DOCTYPE html>
@@ -58,7 +75,7 @@ $data2 = query("SELECT * FROM dataGejala");
     <div class="table" id="table">
         <h3>Data Kerusakan</h3>
         <div class="table-content">
-            <table border="1" cellpadding="8" cellspacing="0" style="width:90%";>
+            <table border="1" cellpadding="10" cellspacing="0" style="width:90%";>
                 <tr>
                     <th>No</th>
                     <th>Kode Kerusakan</th>
@@ -67,23 +84,29 @@ $data2 = query("SELECT * FROM dataGejala");
                     <th>Solusi</th>
                     <th>Aksi</th>
                 </tr>
-                <?php $i= 1; ?>
-                <?php foreach( $data1 as $data ) : ?>
-                    <tr>
-                        <td align=center><?= $data["idKerusakan"]; ?></td>
-                        <td><?= $data["kodeKerusakan"]; ?></td>
-                        <td><?= $data["namaKerusakan"]; ?></td>
-                        <td><?= $data["rule"]; ?></td>
-                        <td><?= $data["solusi"]; ?></td>
-                        <td><a href="updateKerusakan.php?idKerusakan=<?= $data["idKerusakan"]; ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                        </svg></a><a href="delete.php?idKerusakan=<?= $data["idKerusakan"]; ?>" onclick="return confirm('Want to delete data?');"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                        </svg></a></td>
+                <?php if($result > 0 ) : ?>
+                    <?php $i = 1; ?>
+                    <?php foreach( $result as $data ) : ?>
+                        <tr>
+                            <td><?= $i; ?></td>
+                            <td><?= $data["kodeKerusakan"]; ?></td>
+                            <td><?= $data["namaKerusakan"]; ?></td>
+                            <td><?= $data["gejala"]; ?></td>
+                            <td><?= $data["solusi"]; ?></td>
+                            <td><a href="function.php?id=<?= $dt["idGejala"]; ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                            </svg></a><a href="function.php?id=<?= $dt["idGejala"]; ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                            </svg></a></td>
                         </tr>
-                    <?php $i++; ?>
-                <?php endforeach; ?>
+                        <?php $i++; ?>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan='5'>Tidak ada data</td>
+                    </tr>
+                <?php endif; ?>
             </table>
         </div>
     </div>

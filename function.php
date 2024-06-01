@@ -1,7 +1,7 @@
 <?php
 
 // Koneksi ke database
-$conn = mysqli_connect("localhost", "root", "", "analisaData");
+$conn = mysqli_connect("localhost", "root", "", "analisaLan");
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -44,7 +44,7 @@ function login($log){
     }
 
     // Ambil informasi pengguna dari database
-    $query = "SELECT * FROM dataUser 
+    $query = "SELECT * FROM users 
                 WHERE 
                 username='$username' AND password='$password' AND role='$role'";
     $result = mysqli_query($conn, $query);
@@ -66,7 +66,7 @@ function login($log){
         } else {
             echo "
             <script>
-                document.location.href = 'userPage.php';
+                document.location.href = 'homeUser.php';
             </script>
             ";
             return false;
@@ -86,7 +86,7 @@ function login($log){
 }
 
 
-function insert($data){
+function signUp($data){
     global $conn;
 
     // get data from $data
@@ -94,7 +94,7 @@ function insert($data){
     $password = htmlspecialchars($data["password"]);
     $role = htmlspecialchars($data["role"]);
 
-    $query = "INSERT INTO dataUser 
+    $query = "INSERT INTO users
                 VALUES(
                     NULL,
                     '$username',
@@ -173,6 +173,10 @@ global $conn;
     mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);
+
+}
+
+function getKerusakan($data){
 
 }
 
