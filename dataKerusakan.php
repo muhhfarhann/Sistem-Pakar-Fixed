@@ -2,22 +2,7 @@
 
 require 'function.php';
 
-$sql= "
-SELECT 
-    k.kodeKerusakan, 
-    k.namaKerusakan, 
-    GROUP_CONCAT(g.namaGejala ORDER BY g.namaGejala SEPARATOR ', ') AS gejala, 
-    s.solusi 
-FROM 
-    kerusakan k 
-JOIN 
-    rule r ON k.kodeKerusakan = r.kodeKerusakan 
-JOIN 
-    gejala g ON r.kodeGejala = g.kodeGejala 
-JOIN 
-    solusi s ON k.kodeKerusakan = s.kodeKerusakan 
-GROUP BY 
-    k.kodeKerusakan";
+$sql= "SELECT * FROM kerusakan";
 
 $result = query($sql);
 
@@ -27,7 +12,7 @@ $result = query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consult | PHP</title>
+    <title>Dashboard Kerusakan</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Feather Icons -->
@@ -40,7 +25,7 @@ $result = query($sql);
     <!-- My CSS -->
     <link rel="stylesheet" href="css/dataKerusakan.css">
     <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
     <?php
@@ -54,52 +39,57 @@ $result = query($sql);
     <!-- Navbar Start -->
     <nav class="navbar">
         <div class="container">
+            <div class="navbar-brand">
+                Intellegent.
+            </div>
             <div class="navbar-nav">
                 <a href="home.php">Home</a>
+                <a href="dataUser.php">User</a>
                 <a href="#table" class="nav-link <?php if ($is_home_page) echo 'disabled'; ?>">Data Kerusakan</a>
                 <a href="dataGejala.php">Data Gejala</a>
-                <a href="dataPengetahuan.php">Data Pengetahuan</a>
-                <a href="insert.php" onclick="
-                return confirm('Add data?'); " title="ADD DATA">
+                <a href="solusi.php">Solusi</a>
+                <a href="insertKerusakan.php" title="ADD DATA">
                     <i data-feather="plus"></i>
                 </a>
-                <a href="login.php" onclick="
-                return confirm('Want to logout?'); ">
+                <a href="login.php" onclick="return confirm('Want to logout?');">
                     <i data-feather="log-out" width="20" height="20"></i>
                 </a>
             </div>
         </div>
     </nav>
 
+
     <!-- Table -->
     <div class="table" id="table">
         <h3>Data Kerusakan</h3>
         <div class="table-content">
             <table border="1" cellpadding="10" cellspacing="0" style="width:90%";>
-                <tr>
-                    <th>No</th>
-                    <th>Kode Kerusakan</th>
-                    <th>Nama Kerusakan</th>
-                    <th>Penyebab</th>
-                    <th>Solusi</th>
-                    <th>Aksi</th>
-                </tr>
-                <?php if($result > 0 ) : ?>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Kode Kerusakan</th>
+                        <th>Nama Kerusakan</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <?php if(count($result) > 0 ) : ?>
                     <?php $i = 1; ?>
                     <?php foreach( $result as $data ) : ?>
-                        <tr>
-                            <td><?= $i; ?></td>
-                            <td><?= $data["kodeKerusakan"]; ?></td>
-                            <td><?= $data["namaKerusakan"]; ?></td>
-                            <td><?= $data["gejala"]; ?></td>
-                            <td><?= $data["solusi"]; ?></td>
-                            <td><a href="function.php?id=<?= $dt["idGejala"]; ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                            </svg></a><a href="function.php?id=<?= $dt["idGejala"]; ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                            </svg></a></td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td align="center"><?= $i; ?></td>
+                                <td><?= $data["kodeKerusakan"]; ?></td>
+                                <td><?= $data["namaKerusakan"]; ?></td>
+                                <td class="btn">
+                                    <a href="update.php?kodeKerusakan=<?= $data["kodeKerusakan"]; ?>">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <a href="function.php?action=delete&kodeKerusakan=<?= $data["kodeKerusakan"]; ?>" onclick="return confirm('Yakin Ingin Menghapus?');">
+                                        <i class="bi bi-trash3"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
                         <?php $i++; ?>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -111,10 +101,13 @@ $result = query($sql);
         </div>
     </div>
 
+
 <!-- Feather Icons -->
 <script>
 feather.replace();
 </script>
+<!-- My Js -->
+<script src="jsc/index.js"></script>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <!-- Core theme JS-->

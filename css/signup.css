@@ -8,7 +8,10 @@
 
 body{
     font-family: 'Montserrat', 'Times New Roman';
-    background-image: url(../assets/img/header-bg.jpg);
+    background-image: url(../assets/sign.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     color: #f1f1f1;
 }
 
@@ -19,8 +22,10 @@ body{
     padding-top: 6rem;
 }
 
-.container h2{
+.container h2, p{
+    font-weight: 700;
     text-align: center;
+    text-shadow: 0px 0px rgba(0,0,0.5); 
 }
 
 .container .content{

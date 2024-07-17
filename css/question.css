@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+    outline: none;
+    text-decoration: none;
+}
+
+body{
+    font-family: 'Montserrat', 'Times New Roman';
+}
+
+/* navbar */
+.navbar {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.navbar .container a{
+
+    color: #fff;
+    text-decoration: none;
+    font-size: 12pt;
+
+}
+
+.navbar .container .navbar-collapse ul li a:hover{
+    color: green;
+    transform: scale(1.1);
+}
+
+#container {
+    display: flex;
+    flex-wrap: no-wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-left: 7rem;
+    width: 80%;
+}
+
+#container .content-mt-4{
+}

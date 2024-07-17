@@ -1,9 +1,12 @@
 <?php 
 require 'function.php';
+$error = false;
 
 if ( isset($_POST["submit"]) ) {
     
-    if( signUp($_POST) > 0){
+    if( !isset($_POST["check"]) ){
+        $error = true;
+    }elseif( signUp($_POST) > 0){
         echo"
         <script>
             alert('Success');
@@ -14,7 +17,7 @@ if ( isset($_POST["submit"]) ) {
         echo"
         <script>
             alert('Fail Insert Data');
-            document.location.href = 'signup.php';
+            document.location.href = 'signUp.php';
         </script>
         ";
 
@@ -46,6 +49,9 @@ if ( isset($_POST["submit"]) ) {
 
     <div class="container">
         <h2>SIGNUP</h2>
+        <?php if( $error ) : ?>
+                        <p style="font-style: italic; color: black; ">Please CLick Check Button</p>
+                    <?php endif; ?>
         <div class="content">
             <form action="" method="post" autocomplete="off">
                 <div class="row">
@@ -55,7 +61,7 @@ if ( isset($_POST["submit"]) ) {
                         <div id="emailHelp" class="form-text" style="font-style:italic;color:red;">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="col-md">
-                        <input type="hidden" class="form-control" id="role" style="width:50%;" name="role" value="user" required>
+                        <input type="hidden" class="form-control" id="role" style="width:50%;" name="role" value="user">
                     </div>
                 </div>
                 <div class="row-md">
@@ -66,7 +72,7 @@ if ( isset($_POST["submit"]) ) {
                 </div>
                 <div class="row-md">
                     <div class="col-md-6 mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="check">
                         <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div>
                     <div class="col-md">

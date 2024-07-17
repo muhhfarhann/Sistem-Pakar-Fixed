@@ -1,14 +1,19 @@
 <?php 
 
 require 'function.php';
-$data1 = query("SELECT * FROM dataKerusakan"); 
+$data1 = query("SELECT * FROM kerusakan"); 
 
-if (isset($_POST["submit"])) {
+if ( isset($_POST["submit"]) ) {
+
     $error = false;
-    if (!empty($_POST["kodeKerusakan"])) {
+    if ( isset($_POST["namaKerusakan"]) && isset($_POST["kodeKerusakan"]) && !empty($_POST["namaKerusakan"]) ) {
+
         $kodeKerusakan = $_POST["kodeKerusakan"];
+        $Kerusakan = $_POST["namaKerusakan"];
 
         $_SESSION["kodeKerusakan"] = $kodeKerusakan;
+        $_SESSION["namaKerusakan"] = $Kerusakan;
+        $_SESSION["username"];
         header("Location: question.php");
         exit;
 
@@ -47,52 +52,52 @@ if (isset($_POST["submit"])) {
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
+            <a href="homeUser.php"><h5>INTELE<span class="text-success">GENT</span></h5></a>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                </li>
-            </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="homeUser.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="login.php" onclick="return confirm('Want To Logout?');"><i data-feather="log-out" width="20"></i></a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Table -->
-    <section class="container-content" id="container">
-        <div class="content">
-            <form action="" method="post">
-                <div class="row">
-                    <h5>Start Consult</h5> 
-                    <?php if(isset($error)) : ?>
-                        <p style="color: red; font-style: italic;">data tidak boleh kosong</p>
+    <!-- main start -->
+    <main id="main" class="main mt-4">
+        <div class="container">
+            <div class="row row-first">
+                <div class="col-md text-center">
+                    <h4 class="text-success">Select Kerusakan!</h4>
+                    <?php if( isset($error )) : ?>
+                        <p class="text-center text-danger" style="font-style: italic;">Please input first</p>
                     <?php endif; ?>
                 </div>
-                <div class="row mb-2">
-                    <div class="col">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownKerusakan" data-bs-toggle="dropdown" aria-expanded="false">
-                            -Pilih Kerusakan Jaringan LAN-
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownKerusakan">
-                            <?php foreach($data1 as $dt) : ?>
-                                <li><a class="dropdown-item" href="#" onclick="selectKerusakan('<?= $dt["kodeKerusakan"] ?>', '<?= $dt["namaKerusakan"] ?>')"><?= $dt["kodeKerusakan"]." ".$dt["namaKerusakan"]; ?></a></li>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <form action="" method="post"> 
+                        <select id="selectKerusakan" class="form-select form-select-sm mt-4 mb-4" aria-label=".form-select-sm example" onchange="updateInputValue()">
+                            <option selected disabled>Open this select menu</option>
+                            <?php foreach($data1 as $dt): ?>
+                                <option value="<?= $dt["kodeKerusakan"]."|".$dt["namaKerusakan"]; ?>"><?= $dt["namaKerusakan"]; ?></option>
                             <?php endforeach; ?>
-                        </ul>
-                        <input type="hidden" name="kodeKerusakan" id="selectedKerusakan" required>
-                    </div>
+                        </select>
+                        <input type="hidden" id="inputKerusakan" name="namaKerusakan" value="">
+                        <input type="hidden" id="inputKodeKerusakan" name="kodeKerusakan" value="">
+                        <button type="submit" class="btn btn-outline-success btn-sm" name="submit">Submit</button>
+                    </form>
                 </div>
-                <button class="btn btn-success" type="submit" name="submit">SAVE</button>
-            </form>
+                <div class="col-md">
+                    <img class="" src="assets/img/s.png" alt="" width="150">
+                </div>
+            </div>
         </div>
-    </section>
+    </main>
+    <!-- main start -->
 
 <!-- Feather Icons -->
 <script>

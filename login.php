@@ -3,15 +3,20 @@
 require 'function.php';
 // for showing paragraf under title
 $error = false;
+$checkerror = false;
 
-// if button submit was click
+// Jika tombol submit diklik
 if ( isset($_POST["submit"]) ) {
-    // Memeriksa apakah hasil query mengembalikan baris data
-    if ( login($_POST)> 0) {
+
+    if( !isset($_POST["check"]) ){ //check if check button clicked
+
+        $checkerror = true;
+
+    }else if ( login($_POST) > 0) {    // Memeriksa apakah hasil query login mengembalikan baris data
         // Login berhasil
-        echo"
+        echo "
         <script>
-            document.location.href = 'home.php';
+            document.location.href='home.php';
         </script>
         ";
         exit; // Pastikan untuk keluar setelah melakukan redireksi
@@ -21,10 +26,13 @@ if ( isset($_POST["submit"]) ) {
         <script>
             alert('Failed');
         </script>
-        ".$error = true;
+        ";
+        $error = true;
     }
 
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,13 +66,10 @@ if ( isset($_POST["submit"]) ) {
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="about.php">About us</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="signUp.php">Sign Up</a>
+                <a class="nav-link active" aria-current="page" href="signUp.php">Sign-Up</a>
                 </li>
             </ul>
             </div>
@@ -75,38 +80,28 @@ if ( isset($_POST["submit"]) ) {
     <section class="hero">
         <main class="content">
             <div class="row text-center">
-                <h1 class="text-center">Halaman <span class="text-success">Masuk</span></h1>
-                <?php if($error) : ?>
+                <h1 class="text-center"><span class="text-success">Masuk</span></h1>
+                <?php if( $checkerror ) : ?>
+                    <p style="font-style: italic; color: red;">Please Click Check Button!</p>
+                <?php elseif($error) : ?>
                     <p style="font-style: italic; color: red;">please valid input</p>
                 <?php endif; ?>
             </div>
             <div class="row ms-auto justify-content-center">
                 <div class="col-md-10">
-                    <form action=" " method="post">.
+                    <form id="loginForm" action=" " method="post">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="username" aria-describedby="username" name="username">
+                                    <input type="text" class="form-control" id="username" aria-describedby="username" name="username" placeholder="username" required>
                                 </div>
-                                <div class="-mb-4">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control mb-4" id="password" name="password">
-                                    <button type="submit" class="btn btn-success" name="submit">Login</button>
-                                    <!-- Tambahkan ikon putar di bawah -->
-                                    <div class="spinner-border text-light d-none" role="status" id="loginSpinner">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="role" class="form-label">Who's?</label>
-                                    <input type="text" class="form-control" id="role" name="role" placeholder="Ex ADMIN">
-                                </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="Check">
-                                    <label class="form-check-label" for="Check" name="check">Check me out</label>
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control mb-4" id="password" name="password" placeholder="password" required>
+                                    <input type="checkbox" class="form-check-input" id="Check" name="check">
+                                    <label class="form-check-label" for="Check">Check me out</label>
+                                    <button type="submit" class="btn btn-success" id="loginButton" name="submit">Login</button>
                                 </div>
                             </div>
                         </div>

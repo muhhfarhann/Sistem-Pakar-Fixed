@@ -2845,12 +2845,12 @@ textarea.form-control-lg {
 }
 
 .btn-primary {
-  --bs-btn-color: #fff;
-  --bs-btn-bg: #000000;
+  --bs-btn-color: #c1c1c1 transition: .1s ease-in-out;;
+  --bs-btn-bg: #29714c00;
   --bs-btn-border-color: #ffffff;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #0f3105;
-  --bs-btn-hover-border-color: #ffc400;
+  --bs-btn-hover-bg: #113f0e;
+  --bs-btn-hover-border-color: #ffffff;
   --bs-btn-focus-shadow-rgb: 255, 208, 38;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #34a300;
@@ -10859,10 +10859,21 @@ p {
   }
 }
 .btn-xl {
-  padding: 1.25rem 2.5rem;
+  display: inline-flex; /* Menggunakan inline-flex untuk memudahkan pengaturan posisi */
+  align-items: center; /* Vertikal tengah */
+  justify-content: center; /* Horizontal tengah */
+  padding: 0.75rem 1.5rem; /* Mengurangi padding agar teks tidak terlalu kecil */
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: 1.125rem;
-  font-weight: 700;
+  font-size: 1.25rem; /* Meningkatkan ukuran font */
+  font-weight: 500;
+  height: 3rem; /* Mengatur tinggi tombol */
+  max-height: none; /* Menghapus batas tinggi maksimal */
+  text-align: center; /* Teks di tengah */
+  border: none; /* Menghapus border default */
+  border-radius: 0.25rem; /* Membuat sudut sedikit membulat */
+  background-color: #265b1c; /* Warna background */
+  color: white; /* Warna teks */
+  cursor: pointer; /* Menunjukkan bahwa ini adalah tombol */
 }
 
 .btn-social {
@@ -10878,8 +10889,17 @@ p {
 #mainNav {
   padding-top: 1rem;
   padding-bottom: 1rem;
-  background-color: #00000070;
+  transition: .5s;
 }
+
+.navbar-active{
+  background: #173a6d57;
+}
+
+#mainNav-active{
+  background-color: #fff;
+}
+
 #mainNav .navbar-toggler {
   padding: 0.75rem;
   font-size: 0.75rem;
@@ -10900,21 +10920,23 @@ p {
 #mainNav .navbar-nav .nav-item .nav-link {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 0.95rem;
-  color: #fff;
+  color: #1c811a;
   letter-spacing: 0.0625em;
+  transition: .2s ease-in-out;
 }
 #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
-  color: #033803;
+  color: #fff;
 }
 
 @media (min-width: 992px) {
-  #mainNav {
+  .navbar-transparent {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     border: none;
     background-color: transparent;
     transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
   }
+
   #mainNav .navbar-brand {
     font-size: 1.5em;
     transition: font-size 0.3s ease-in-out;
@@ -10943,18 +10965,31 @@ p {
   }
 }
 header.masthead {
-  padding-top: 10.5rem;
+  margin-top: -10rem;
+  padding-top: 2rem; /* Kurangi padding atas untuk mendekati navbar */
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
   text-shadow: 2px 2px #000;
-  background-image: url("../assets/img/Earth.jpg");
+  background-image: linear-gradient(to right, rgb(0, 59, 93), white);
   background-repeat: no-repeat;
   background-attachment: scroll;
-  background-position: center;
-  background-position-x: left;
+  background-position: center left;
   background-size: cover;
 }
+
+header.masthead .container {
+  display: flex;
+  flex-direction: row; 
+  align-items: center; /* Posisikan elemen di tengah secara horizontal */
+  justify-content: center; /* Posisikan elemen di tengah secara vertikal */
+  height: 100%; /* Ambil seluruh tinggi header */
+}
+
+header.masthead .container > * {
+  margin: 1rem 0; /* Tambahkan margin di antara elemen-elemen */
+}
+
 header.masthead .masthead-subheading {
   font-size: 1.5rem;
   font-style: italic;
@@ -11313,6 +11348,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 .footer {
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 8pt;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  background: rgb(0 0 0);
 }

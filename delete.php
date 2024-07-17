@@ -2,16 +2,16 @@
 
 require 'function.php';
 
-$id = $_GET["idKerusakan"];
+$kodeKerusakan = $_GET["kodeKerusakan"];
 
-if ( delete($id) > 0 ) {
+if ( delete($kodeKerusakan) > 0 ) {
 
     echo "
     <script>
         alert('Data Deleted');
         document.location.href = 'dataKerusakan.php';
     </script>
-    ";
+    ";exit;
 
 }else{
 

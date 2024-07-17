@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Montserrat', 'Times New Roman';
+    background: #e7e7e7;
+    color: rgb(0, 0, 0);
+    height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    height: 50px;
+    z-index: 9999;
+    width: 100%;
+}
+
+.navbar .container {
+    background-color: rgb(33, 37, 41);
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    flex-direction: row;
+}
+
+.navbar .container .navbar-brand {
+    color: #fafafa;
+    font-size: 1.1rem;
+    margin-left: 4rem;
+    margin-right: auto;
+}
+
+.navbar .container .navbar-nav {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding-right: 4rem;
+}
+
+.navbar .container .navbar-nav a {
+    margin-left: 3rem;
+    color: #fafafa;
+    transition: .2s;
+}
+
+.navbar .container .navbar-nav a:hover {
+    color: green;
+}
+
+.nav-link.disabled {
+    pointer-events: none;
+    opacity: 0.2;
+    color: gray;
+}
+
+/* form */
+.form {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    width: 50vw;
+    background: #fff;
+    margin: 6rem auto; /* Centers the form and adds margin on top */
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+.form .container h4 {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.form .container form {
+    width: 100%;
+}
+
+.form .container form .row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.form .container .row select {
+    padding: 1rem;
+    width: 100%;
+    max-width: 100%; /* Atur lebar maksimal select sesuai dengan parent */
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    font-weight: bold;
+    background: black;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.form .container .row select option {
+    color: white; /* Ensure options text is readable */
+    background-color: green; /* White background for options */
+    width: 100%;
+    white-space: normal; /* Allow text wrapping */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis (...) to indicate overflow */
+}
+
+.form .container form .row label {
+    margin-bottom: 0.5rem;
+    font-weight: regular;
+}
+
+.form .container form .row input {
+    padding: 0.75rem;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Checkbox styling */
+.form .container form .row.check {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.form .container form .row.check input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+}
+
+.form .container form button {
+    padding: 0.75rem 1.5rem;
+    background-color: #16954e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form .container form .btn-back {
+    padding: 0.75rem 1.5rem;
+    background-color: yellow;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: grab;
+    transition: background-color 0.3s ease;
+}
+
+.form .container form button:hover {
+    background-color: #0d592e;
+}

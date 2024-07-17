@@ -9,10 +9,7 @@ $data = query("SELECT * FROM gejala");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Gejala</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consult | PHP</title>
+    <title>Dashboard Gejala</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Feather Icons -->
@@ -25,7 +22,7 @@ $data = query("SELECT * FROM gejala");
     <!-- My CSS -->
     <link rel="stylesheet" href="css/gejala.css">
     <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
 
@@ -40,13 +37,19 @@ $data = query("SELECT * FROM gejala");
     <!-- Navbar Start -->
     <nav class="navbar">
         <div class="container">
+            <div class="navbar-brand">
+                Intellegent.
+            </div>
             <div class="navbar-nav">
                 <a href="home.php">Home</a>
+                <a href="dataUser.php">User</a>
                 <a href="dataKerusakan.php">Data Kerusakan</a>
                 <a href="dataGejala.php" class="nav-link <?php if ($is_home_page) echo 'disabled'; ?>">Data Gejala</a>
-                <a href="dataPengetahuan.php">Data Pengetahuan</a>
-                <a href="login.php" onclick="
-                return confirm('Sure?'); ">
+                <a href="solusi.php">Solusi</a>
+                <a href="insertGejala.php" onclick="return confirm('Add data?');" title="ADD DATA">
+                    <i data-feather="plus"></i>
+                </a>
+                <a href="login.php" onclick="return confirm('Want to logout?');">
                     <i data-feather="log-out" width="20" height="20"></i>
                 </a>
             </div>
@@ -55,7 +58,7 @@ $data = query("SELECT * FROM gejala");
 
     <!-- Table -->
     <div class="table" id="table">
-        <h3>Data Gejala</h3> 
+        <h3 class="text-center">Data Gejala</h3> 
         <div class="table-content">
             <table border="1" cellpadding="10" cellspacing="0" style="width:70%";>
                 <tr>
@@ -70,12 +73,14 @@ $data = query("SELECT * FROM gejala");
                         <td align="center"><?= $i; ?></td>
                         <td><?= $dt["kodeGejala"]; ?></td>
                         <td><?= $dt["namaGejala"]; ?></td>
-                        <td><a href="function.php?id=<?= $dt["kodeGejala"]; ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                        </svg></a><a href="function.php?id=<?= $dt["kodeGejala"]; ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                        </svg></a></td>
+                        <td>
+                            <a href="updateGejala.php?kodeGejala=<?= $dt["kodeGejala"]; ?>">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <a href="function.php?action=deleteGejala&kodeGejala=<?= $dt["kodeGejala"]; ?>" class="red" onclick="return confirm('Yakin Hapus Data?');">
+                                <i class="bi bi-x-lg"></i>
+                            </a>
+                        </td>
                     </tr>
                     <?php $i++; ?>
                 <?php endforeach; ?>
